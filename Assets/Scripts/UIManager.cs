@@ -18,21 +18,38 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text timerText;
 
-    public bool isGameOver = false;
+    [SerializeField]
+    private GameObject startPanel;
 
+    public bool onStart = true;
+    public bool isGameOver = false;
     public bool isWin = false;
 
     // Start is called before the first frame update
     void Start()
     {
         timerText.text = "0:00";
+        Time.timeScale = 0;
         gameOverPanel.SetActive (false);
         winPanel.SetActive(false);
+        startPanel.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(onStart)
+        {
+            Debug.Log("Hi first??");
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Debug.Log("Hi??");
+                onStart = false;
+                startPanel.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
+
         if (isGameOver || isWin)
         {
             Time.timeScale = 0;
