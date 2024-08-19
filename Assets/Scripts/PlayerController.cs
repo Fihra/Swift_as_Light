@@ -48,22 +48,20 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(dasher.Dashing());
         }
 
-        //if(Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    movement.MoveInDirection(new Vector2(-1, 0));
-        //}
+        if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            movement.FallingSpeed();
+        }
 
-        //if(Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    movement.MoveInDirection(new Vector2(1, 0));
-        //}
+        if(Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            movement.ResetGravity();
+        }    
+
     }
 
     void FlipSprite(float horizontal)
-    //if(horizontal > )  
     {
-        //Debug.Log("Direction: " + horizontal);
-
         if(horizontal > 0f)
         {
             spriteRenderer.flipX = false;
@@ -74,12 +72,6 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = true;
         }
 
-        //if (!isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        //{
-        //    isFacingRight = !isFacingRight;
-        //    Vector3 localScale = transform.localScale;
-        //    localScale.x *= -1f;
-        //    transform.localScale = localScale;
-        //}
+
     }
 }

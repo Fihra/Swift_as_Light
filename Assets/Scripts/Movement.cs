@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour
 {
     Animator animator;
 
+    GroundDetector groundDetector;
+
     [SerializeField]
     private float acceleration = 10f;
 
@@ -20,6 +22,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        groundDetector = GetComponent<GroundDetector>();
     }
 
     public void MoveInDirection(Vector2 direction)
@@ -34,5 +37,18 @@ public class Movement : MonoBehaviour
         animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
 
         rb.velocity = newVelocity;
+    }
+
+    public void FallingSpeed()
+    {
+        if (!groundDetector.onGround)
+        {
+            rb.gravityScale = 4.5f;
+        }
+    }
+
+    public void ResetGravity()
+    {
+        rb.gravityScale = 1f;
     }
 }
