@@ -33,7 +33,6 @@ public class UIManager : MonoBehaviour
 
     Color32 selectedColor = new Color32(40, 216, 255, 255);
 
-    // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 0;
@@ -42,16 +41,9 @@ public class UIManager : MonoBehaviour
         startPanel.SetActive(true);
         timerObj = GetComponent<Timer>();
         audioManager = GameObject.Find("MusicManager").GetComponent<AudioManager>();
-        //Debug.Log(tracks[0].GetComponent<TMP_Text>());
-
-        //tracks = GetComponent<UIManager>().tracks;
         tracks[currentTrackSelected].GetComponent<TMP_Text>().color = selectedColor;
     }
 
-    //TODO
-    //Implement UI on start panel to signify to player their selected music track, change color of the number track
-
-    // Update is called once per frame
     void Update()
     {
         if(onStart)
@@ -107,7 +99,6 @@ public class UIManager : MonoBehaviour
 
     public void ClearTrackColors()
     {
-        Debug.Log("Tracks: " + tracks);
         foreach(var track in tracks)
         {
             track.GetComponent<TMP_Text>().color = new Color32(255, 255, 255, 255);
