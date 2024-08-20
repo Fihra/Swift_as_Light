@@ -13,13 +13,14 @@ public class UIManager : MonoBehaviour
     private GameObject winPanel;
 
     [SerializeField]
-    private GameObject timerUI;
-
-    [SerializeField]
-    private TMP_Text timerText;
-
-    [SerializeField]
     private GameObject startPanel;
+
+    [SerializeField]
+    private TMP_Text endTimeOnWinPanel;
+
+    Timer timerObj;
+
+    AudioManager audioManager;
 
     public bool onStart = true;
     public bool isGameOver = false;
@@ -28,11 +29,12 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timerText.text = "0:00";
         Time.timeScale = 0;
         gameOverPanel.SetActive (false);
         winPanel.SetActive(false);
         startPanel.SetActive(true);
+        timerObj = GetComponent<Timer>();
+        audioManager = GameObject.Find("MusicManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -40,35 +42,45 @@ public class UIManager : MonoBehaviour
     {
         if(onStart)
         {
-            Debug.Log("Hi first??");
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                Debug.Log("Hi??");
                 onStart = false;
                 startPanel.SetActive(false);
                 Time.timeScale = 1;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                audioManager.StartTrack("Track 1");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                audioManager.StartTrack("Track 2");
+            }
+
+            if(Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                audioManager.StartTrack("Track 3");
             }
         }
 
         if (isGameOver || isWin)
         {
             Time.timeScale = 0;
+
+            if(isWin)
+            {
+                endTimeOnWinPanel.text = timerObj.FinalTime();
+            }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Time.timeScale = 1;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
-
-        //if (isWin)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //    }
-        //}
     }
-
     public void ShowGameOverScreen()
     {
         isGameOver = true;
