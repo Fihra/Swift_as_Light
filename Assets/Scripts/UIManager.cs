@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text endTimeOnWinPanel;
 
+    [SerializeField]
+    private List<GameObject> tracks = new List<GameObject>();
+
     Timer timerObj;
 
     AudioManager audioManager;
@@ -25,6 +28,10 @@ public class UIManager : MonoBehaviour
     public bool onStart = true;
     public bool isGameOver = false;
     public bool isWin = false;
+
+    private int currentTrackSelected = 0;
+
+    Color32 selectedColor = new Color32(40, 216, 255, 255);
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +42,14 @@ public class UIManager : MonoBehaviour
         startPanel.SetActive(true);
         timerObj = GetComponent<Timer>();
         audioManager = GameObject.Find("MusicManager").GetComponent<AudioManager>();
+        //Debug.Log(tracks[0].GetComponent<TMP_Text>());
+
+        //tracks = GetComponent<UIManager>().tracks;
+        tracks[currentTrackSelected].GetComponent<TMP_Text>().color = selectedColor;
     }
+
+    //TODO
+    //Implement UI on start panel to signify to player their selected music track, change color of the number track
 
     // Update is called once per frame
     void Update()
@@ -51,16 +65,25 @@ public class UIManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
+                ClearTrackColors();
+                currentTrackSelected = 0;
+                tracks[currentTrackSelected].GetComponent<TMP_Text>().color = selectedColor;
                 audioManager.StartTrack("Track 1");
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
+                ClearTrackColors();
+                currentTrackSelected = 1;
+                tracks[currentTrackSelected].GetComponent<TMP_Text>().color = selectedColor;
                 audioManager.StartTrack("Track 2");
             }
 
             if(Input.GetKeyDown(KeyCode.Alpha3))
             {
+                ClearTrackColors();
+                currentTrackSelected = 2;
+                tracks[currentTrackSelected].GetComponent<TMP_Text>().color = selectedColor;
                 audioManager.StartTrack("Track 3");
             }
         }
@@ -81,6 +104,16 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    public void ClearTrackColors()
+    {
+        Debug.Log("Tracks: " + tracks);
+        foreach(var track in tracks)
+        {
+            track.GetComponent<TMP_Text>().color = new Color32(255, 255, 255, 255);
+        }
+    }
+
     public void ShowGameOverScreen()
     {
         isGameOver = true;
