@@ -5458,8 +5458,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294957096
+  m_fontColor: {r: 0.15566039, g: 0.84865373, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -18335,6 +18335,10 @@ MonoBehaviour:
   winPanel: {fileID: 1564707323}
   startPanel: {fileID: 182100561}
   endTimeOnWinPanel: {fileID: 786490024}
+  tracks:
+  - {fileID: 223478974}
+  - {fileID: 76797597}
+  - {fileID: 4066698}
   onStart: 1
   isGameOver: 0
   isWin: 0
