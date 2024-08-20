@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
         {
             movement.ResetGravity();
         }    
-
     }
 
     void FlipSprite(float horizontal)
