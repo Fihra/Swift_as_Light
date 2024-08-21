@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Goal
+  - Clouds1
+  - Clouds2
+  - Clouds3
   layers:
   - Default
   - TransparentFX
