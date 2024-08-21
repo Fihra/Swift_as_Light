@@ -48,15 +48,19 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(dasher.Dashing());
         }
 
-        if(Input.GetKeyDown(KeyCode.DownArrow))
+        if(Input.GetKey(KeyCode.DownArrow))
         {
             movement.FallingSpeed();
-        }
-
-        if(Input.GetKeyUp(KeyCode.DownArrow))
+        } 
+        else
         {
             movement.ResetGravity();
-        }    
+        }
+
+        //if(Input.GetKeyUp(KeyCode.DownArrow))
+        //{
+        //    movement.ResetGravity();
+        //}    
     }
 
     void FlipSprite(float horizontal)
