@@ -33,7 +33,7 @@ public class Jump : MonoBehaviour
         {
             rb.velocity += new Vector2(0f, jumpForce);
             animator.SetBool("isJumping", !groundDetector.onGround);
-            animator.SetFloat("yVelocity", rb.velocity.y);
+            animator.SetFloat("yVelocity", 1);
 
             if (rb.velocity.y > jumpForce)
             {

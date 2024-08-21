@@ -44,11 +44,13 @@ public class Movement : MonoBehaviour
         if (!groundDetector.onGround)
         {
             rb.gravityScale = 4.5f;
+            animator.SetFloat("yVelocity", -1f);
         }
     }
 
     public void ResetGravity()
     {
         rb.gravityScale = 1f;
+        animator.SetFloat("yVelocity", 0);
     }
 }
