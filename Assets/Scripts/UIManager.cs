@@ -48,6 +48,8 @@ public class UIManager : MonoBehaviour
     {
         if(onStart)
         {
+            AudioManager.instance.InPanel(0f);
+
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 onStart = false;
@@ -83,6 +85,7 @@ public class UIManager : MonoBehaviour
         if (isGameOver || isWin)
         {
             Time.timeScale = 0;
+            AudioManager.instance.InPanel(1f);
 
             if(isWin)
             {

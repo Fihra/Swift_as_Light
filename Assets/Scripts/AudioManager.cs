@@ -16,7 +16,13 @@ public class AudioManager : MonoBehaviour
 
     EventDescription musicDescription;
 
-    // Start is called before the first frame update
+    float normalParameter = 0;
+    float lowPassParamter = 1f;
+
+    PARAMETER_ID parameterID;
+
+    PARAMETER_DESCRIPTION lowPassPanel;
+
     void Start()
     {
         if(instance != null)
@@ -28,30 +34,26 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this);
-            //music = RuntimeManager.CreateInstance(musicEvent);
-            //music.start();
             StartTrack("Track 1");
         }
         
     }
 
-
-    //Track 1
     public void StartTrack(string trackSelect)
     {
-        //FMOD.Studio.PLAYBACK_STATE musicState;
-        //music.getPlaybackState(out musicState);
-        //if (musicState == )
         music.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        InPanel(normalParameter);
 
         switch(trackSelect)
         {
             case "Track 1":
                 music = RuntimeManager.CreateInstance("event:/Music/GameTheme");
+                music.getDescription(out musicDescription);
                 music.start();
                 break;
             case "Track 2":
                 music = RuntimeManager.CreateInstance("event:/Music/GameTheme2");
+                music.getDescription(out musicDescription);
                 music.start();
                 break;
             case "Track 3":
@@ -62,11 +64,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    //Track 2
-
-    // Update is called once per frame
-    void Update()
+    public void InPanel(float num)
     {
-        
+        musicDescription.getParameterDescriptionByName("Game Over", out lowPassPanel);
+        music.setParameterByID(lowPassPanel.id, num);
     }
 }
